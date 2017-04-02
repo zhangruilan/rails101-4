@@ -21,14 +21,18 @@ end
 
   def create
     @group = Group.new(group_params)
-    @group.user = current_user
+  #  @group.user = current_user
 
-    if @group.save
-      current_user.join!(@group)
-      redirect_to groups_path
-    else
-      render :new
-    end
+    #if @group.save
+      #current_user.join!(@group)
+      #redirect_to groups_path
+    #else
+      #render :new
+    #end
+
+    @group.save
+
+    redirect_to groups_path
   end
 
   def update
@@ -43,7 +47,7 @@ end
 
   def destroy
     @group.destroy
-    flash[:alert] = "Group deleted"
+    flash[:alert] = "Movie deleted"
     redirect_to groups_path
   end
 
@@ -52,9 +56,9 @@ end
 
     if !current_user.is_member_of?(@group)
       current_user.join!(@group)
-      flash[:notice] = "加入本讨论版成功！"
+      flash[:notice] = "收藏电影成功！"
     else
-      flash[:warning] = "你已经是本讨论版成员了！"
+      flash[:warning] = "你已经收藏电影了！"
 
   end
   redirect_to group_path(@group)
@@ -65,9 +69,9 @@ def quit
 
   if current_user.is_member_of?(@group)
     current_user.quit!(@group)
-    flash[:alert] = "已退出本讨论版！"
+    flash[:alert] = "已取消电影收藏"
   else
-    flash[:warning] = "你已不是本讨论版成员，怎么退出"
+    flash[:warning] = "你没收藏电影，怎么取消？"
 
   end
   redirect_to group_path(@group)

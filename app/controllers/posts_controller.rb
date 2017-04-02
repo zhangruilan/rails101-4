@@ -28,7 +28,7 @@ end
      @group = Group.find(params[:group_id])
      @post = Post.find(params[:id])
      if @post.update(post_params)
-       redirect_to account_posts_path, notice: 'Post Update Success!'
+       redirect_to account_posts_path, notice: 'Review Update Success!'
      else
        render :edit
      end
@@ -38,7 +38,7 @@ def destroy
   @group = Group.find(params[:group_id])
   @post = Post.find(params[:id])
   @post.destroy
-  redirect_to account_posts_path, alert: 'Post Deleted!'
+  redirect_to account_posts_path, alert: 'Review Deleted!'
 end
 
 
